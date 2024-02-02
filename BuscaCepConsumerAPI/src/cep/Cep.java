@@ -2,15 +2,20 @@ package cep;
 
 import javax.swing.ImageIcon;
 import Atxy2k.CustomTextField.RestrictedTextField;
+import java.net.URL;
+import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 
 /**
  *
  * @author emers
  */
 public class Cep extends javax.swing.JFrame {
-    
+
     private ImageIcon icone;
 
     /**
@@ -18,7 +23,7 @@ public class Cep extends javax.swing.JFrame {
      */
     public Cep() {
         /*Uso da Bliblioteca Atxy*/
-        
+
         icone = new javax.swing.ImageIcon(getClass().getResource("/img/home.png"));
         initComponents();
         RestringirTxt(txtCEP);
@@ -47,6 +52,7 @@ public class Cep extends javax.swing.JFrame {
         btnSobre = new javax.swing.JButton();
         cbxUf = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
+        lblStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Buscar CEP");
@@ -62,13 +68,18 @@ public class Cep extends javax.swing.JFrame {
         contentPane.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
 
         jLabel3.setText("Bairro");
-        contentPane.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 41, -1));
+        contentPane.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 41, -1));
 
         jLabel4.setText("Cidade");
-        contentPane.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 41, -1));
+        contentPane.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 41, -1));
 
         btnLimpar.setText("Limpar");
-        contentPane.add(btnLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 73, -1));
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
+        contentPane.add(btnLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 73, -1));
         contentPane.add(txtCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 131, -1));
         contentPane.add(txtBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 194, -1));
         contentPane.add(txtEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 272, -1));
@@ -80,7 +91,7 @@ public class Cep extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        contentPane.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 102, -1));
+        contentPane.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 102, -1));
 
         btnSobre.setBackground(java.awt.SystemColor.control);
         btnSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/about.png"))); // NOI18N
@@ -92,13 +103,14 @@ public class Cep extends javax.swing.JFrame {
                 btnSobreActionPerformed(evt);
             }
         });
-        contentPane.add(btnSobre, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, 48, 48));
+        contentPane.add(btnSobre, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, 48, 48));
 
         cbxUf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
         contentPane.add(cbxUf, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 93, -1));
 
         jLabel5.setText("UF");
-        contentPane.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 23, -1));
+        contentPane.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 23, -1));
+        contentPane.add(lblStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 20, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,12 +130,12 @@ public class Cep extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        if(txtCEP.getText().equals("")){
+        if (txtCEP.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Informe o CEP");
             txtCEP.requestFocus();
-        }else{
+        } else {
             // Buscar CEP
-            
+            buscarCEP();
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -131,6 +143,10 @@ public class Cep extends javax.swing.JFrame {
         Sobre sobre = new Sobre(this, true);
         sobre.setVisible(true);
     }//GEN-LAST:event_btnSobreActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        limpar();
+    }//GEN-LAST:event_btnLimparActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,16 +195,71 @@ public class Cep extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel lblStatus;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCEP;
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtEndereco;
     // End of variables declaration//GEN-END:variables
-  
+
     public void RestringirTxt(JTextField texto) {
         RestrictedTextField validar = new RestrictedTextField(texto);
         validar.setOnlyNums(true);
         validar.setLimit(8);
-        
+
+    }
+
+    // Chamando URL e recebendo um xml
+    private void buscarCEP() {
+        String logradouro = "";
+        String tipoLogradouro = "";
+        String resultado = null;
+        String cep = txtCEP.getText();
+
+        try {
+            URL url = new URL("http://cep.republicavirtual.com.br/web_cep.php?cep=" + cep + "&formato=xml");
+
+            // Para trabalhar com xml
+            SAXReader xml = new SAXReader();
+            Document document = xml.read(url);
+            Element root = document.getRootElement();
+
+            // Percorrendo o aruivo xml com iterator
+            for (Iterator<Element> it = root.elementIterator(); it.hasNext();) {
+                Element element = it.next();
+
+                if (element.getQualifiedName().equals("cidade")) {
+                    txtCidade.setText(element.getText());
+                } else if (element.getQualifiedName().equals("bairro")) {
+                    txtBairro.setText(element.getText());
+                } else if (element.getQualifiedName().equals("logradouro")) {
+                    logradouro = element.getText();
+                } else if (element.getQualifiedName().equals("tipo_logradouro")) {
+                    tipoLogradouro = element.getText();
+                } else if (element.getQualifiedName().equals("uf")) {
+                    cbxUf.setSelectedItem(element.getText());
+                }else if(element.getQualifiedName().equals("resultado")){
+                  resultado = element.getText();
+                  if(resultado.equals("1")){
+                    lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/check.png")));
+                  }else{
+                    JOptionPane.showMessageDialog(null, "CEP não encontrado!");
+                  }
+                }
+            }
+            txtEndereco.setText(tipoLogradouro + " " + logradouro);
+        } catch (Exception e) {
+            System.out.println("erro ao buscar o cep: " + e);
+        }
+    }
+    
+    private void limpar(){
+      txtCEP.setText(null);
+      txtBairro.setText(null);
+      txtCidade.setText(null);
+      txtEndereco.setText(null);
+      cbxUf.setSelectedItem(null);
+      lblStatus.setIcon(null);
+      txtCEP.requestFocus();
     }
 }
