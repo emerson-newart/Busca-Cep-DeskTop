@@ -1,20 +1,27 @@
 package cep;
 
 import javax.swing.ImageIcon;
+import Atxy2k.CustomTextField.RestrictedTextField;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
  * @author emers
  */
 public class Cep extends javax.swing.JFrame {
-
+    
     private ImageIcon icone;
+
     /**
      * Creates new form Cep
      */
     public Cep() {
+        /*Uso da Bliblioteca Atxy*/
+        
         icone = new javax.swing.ImageIcon(getClass().getResource("/img/home.png"));
         initComponents();
+        RestringirTxt(txtCEP);
     }
 
     /**
@@ -68,6 +75,11 @@ public class Cep extends javax.swing.JFrame {
         contentPane.add(txtCEP, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 60, 110, -1));
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
         contentPane.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 102, -1));
 
         btnSobre.setBackground(java.awt.SystemColor.control);
@@ -99,6 +111,16 @@ public class Cep extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        if(txtCEP.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Informe o CEP");
+            txtCEP.requestFocus();
+        }else{
+            // Buscar CEP
+            
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -135,6 +157,7 @@ public class Cep extends javax.swing.JFrame {
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnLimpar;
@@ -151,4 +174,11 @@ public class Cep extends javax.swing.JFrame {
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtEndereco;
     // End of variables declaration//GEN-END:variables
+  
+    public void RestringirTxt(JTextField texto) {
+        RestrictedTextField validar = new RestrictedTextField(texto);
+        validar.setOnlyNums(true);
+        validar.setLimit(8);
+        
+    }
 }
