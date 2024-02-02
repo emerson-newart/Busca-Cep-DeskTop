@@ -26,23 +26,78 @@ public class Cep extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        contentPane = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        btnLimpar = new javax.swing.JButton();
+        txtCidade = new javax.swing.JTextField();
+        txtBairro = new javax.swing.JTextField();
+        txtEndereco = new javax.swing.JTextField();
+        txtCEP = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
+        btnSobre = new javax.swing.JButton();
+        cbxUf = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Buscar CEP");
         setIconImage(icone.getImage());
         setResizable(false);
 
+        contentPane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setText("CEP");
+        contentPane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 30, -1));
+
+        jLabel2.setText("Endereço");
+        contentPane.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+
+        jLabel3.setText("Bairro");
+        contentPane.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 41, -1));
+
+        jLabel4.setText("Cidade");
+        contentPane.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 41, -1));
+
+        btnLimpar.setText("Limpar");
+        contentPane.add(btnLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 73, -1));
+        contentPane.add(txtCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 131, -1));
+        contentPane.add(txtBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 194, -1));
+        contentPane.add(txtEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 272, -1));
+        contentPane.add(txtCEP, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 60, 110, -1));
+
+        btnBuscar.setText("Buscar");
+        contentPane.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 102, -1));
+
+        btnSobre.setBackground(java.awt.SystemColor.control);
+        btnSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/about.png"))); // NOI18N
+        btnSobre.setToolTipText("Sobre o Sistema");
+        btnSobre.setBorder(null);
+        btnSobre.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        contentPane.add(btnSobre, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, 48, 48));
+
+        cbxUf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        contentPane.add(cbxUf, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 93, -1));
+
+        jLabel5.setText("UF");
+        contentPane.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 23, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 623, Short.MAX_VALUE)
+            .addComponent(contentPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 306, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(contentPane, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -81,5 +136,19 @@ public class Cep extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnLimpar;
+    private javax.swing.JButton btnSobre;
+    private javax.swing.JComboBox<String> cbxUf;
+    private javax.swing.JPanel contentPane;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField txtBairro;
+    private javax.swing.JTextField txtCEP;
+    private javax.swing.JTextField txtCidade;
+    private javax.swing.JTextField txtEndereco;
     // End of variables declaration//GEN-END:variables
 }
