@@ -87,6 +87,11 @@ public class Cep extends javax.swing.JFrame {
         btnSobre.setToolTipText("Sobre o Sistema");
         btnSobre.setBorder(null);
         btnSobre.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSobreActionPerformed(evt);
+            }
+        });
         contentPane.add(btnSobre, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, 48, 48));
 
         cbxUf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
@@ -121,6 +126,11 @@ public class Cep extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSobreActionPerformed
+        Sobre sobre = new Sobre(this, true);
+        sobre.setVisible(true);
+    }//GEN-LAST:event_btnSobreActionPerformed
 
     /**
      * @param args the command line arguments

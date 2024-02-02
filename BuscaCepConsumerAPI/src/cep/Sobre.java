@@ -1,5 +1,7 @@
 package cep;
 
+import java.awt.Desktop;
+import java.net.URI;
 import javax.swing.ImageIcon;
 
 public class Sobre extends javax.swing.JDialog {
@@ -26,9 +28,9 @@ public class Sobre extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        lblWebService = new javax.swing.JLabel();
+        btnYoutube = new javax.swing.JButton();
+        btnGithub = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sobre");
@@ -46,16 +48,32 @@ public class Sobre extends javax.swing.JDialog {
         jLabel3.setText("WEB Service:");
         painel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
-        jLabel4.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel4.setText("republicavirtual.com.br");
-        painel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, -1));
+        lblWebService.setForeground(new java.awt.Color(0, 102, 204));
+        lblWebService.setText("republicavirtual.com.br");
+        lblWebService.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblWebService.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblWebServiceMouseClicked(evt);
+            }
+        });
+        painel.add(lblWebService, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, -1));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/youtube.png"))); // NOI18N
-        jButton1.setBorder(null);
-        painel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 48, 48));
+        btnYoutube.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/youtube.png"))); // NOI18N
+        btnYoutube.setBorder(null);
+        btnYoutube.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnYoutubeActionPerformed(evt);
+            }
+        });
+        painel.add(btnYoutube, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 48, 48));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/github.png"))); // NOI18N
-        painel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 48, 48));
+        btnGithub.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/github.png"))); // NOI18N
+        btnGithub.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGithubActionPerformed(evt);
+            }
+        });
+        painel.add(btnGithub, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 48, 48));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -71,6 +89,18 @@ public class Sobre extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lblWebServiceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblWebServiceMouseClicked
+        link("https://www.republicavirtual.com.br/");
+    }//GEN-LAST:event_lblWebServiceMouseClicked
+
+    private void btnYoutubeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYoutubeActionPerformed
+        link("https://www.youtube.com/channel/UCKtt7ux763w9O9XB9Aklq5g");
+    }//GEN-LAST:event_btnYoutubeActionPerformed
+
+    private void btnGithubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGithubActionPerformed
+        link("https://github.com/emerson-newart");
+    }//GEN-LAST:event_btnGithubActionPerformed
 
     /**
      * @param args the command line arguments
@@ -114,13 +144,24 @@ public class Sobre extends javax.swing.JDialog {
         });
     }
 
+    public void link(String site){
+        Desktop desketop = Desktop.getDesktop();
+        
+        try {
+            URI uri = new URI(site);
+            desketop.browse(uri);
+        } catch (Exception e) {
+            System.out.println("erro: "+e);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnGithub;
+    private javax.swing.JButton btnYoutube;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lblWebService;
     private javax.swing.JPanel painel;
     // End of variables declaration//GEN-END:variables
 }
